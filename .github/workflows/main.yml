@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  # Will run on all PR's and pushes to main
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - name: Running lint check
+        run: scons lint

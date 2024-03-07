@@ -1,0 +1,37 @@
+# SConstruct
+import os
+import subprocess
+
+env = Environment(
+    ENV={ 'PATH': os.environ['PATH'] }
+)
+
+###########################################################
+# Action Functions
+###########################################################
+
+COMMAND = COMMAND_LINE_TARGETS[0] if COMMAND_LINE_TARGETS else ''
+
+if COMMAND == 'format' or COMMAND == 'lint':
+    SConscript('scons/format_lint.scons', exports={'env': env})
+
+elif COMMAND == 'setup':
+    SConscript('scons/setup.scons', exports={'env': env})
+
+else: # Unknown command
+    print("UNKNOWN SCONS COMMAND\n") # Future expansion: Run server setup
+
+###########################################################
+# Custom Help Function
+###########################################################
+    
+Help('''
+Usage:
+  scons [OPTIONS]
+
+Options:
+  -h, --help      Show this help message
+  --setup         Download all python libraries
+  --format        Format the code
+  --lint          Run linting on the code
+''')

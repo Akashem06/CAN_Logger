@@ -1,0 +1,9 @@
+import subprocess
+
+Import('env')
+
+def run_setup(target, source, env):
+    subprocess.run(['pip', 'install', '-r', 'requirements.txt'])
+
+
+Command('#/setup', [], run_setup)

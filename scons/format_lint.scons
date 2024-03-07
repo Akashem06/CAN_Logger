@@ -1,0 +1,22 @@
+import subprocess
+import glob
+
+Import('env')
+
+def run_lint(target, source, env):
+    pylint_cmd = 'pylint --rcfile=.pylintrc ' 
+    if len(FILES) > 0:
+        print('Formatting .py files\n')
+        result = subprocess.run(f'{pylint_cmd} {FILES_STR}', shell=True)
+
+        if result.returncode == 0:
+            print("Formatting was successful")
+        else:
+            print("Formatting encountered errors or warnings")
+            Exit(1)
+    
+ROOT = Dir('#')
+FILES = glob.glob(f'{ROOT}/**/*.py', recursive=True)
+FILES_STR = ' '.join(FILES)
+
+Command('#/lint', [], run_lint)

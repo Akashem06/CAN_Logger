@@ -1,0 +1,4 @@
+python-can
+cantools
+python-dotenv
+pylint

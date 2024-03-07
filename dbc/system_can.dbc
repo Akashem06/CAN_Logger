@@ -1,0 +1,268 @@
+NS_ :
+  NS_DESC_
+  CM_
+  BA_DEF_
+  BA_
+  VAL_
+  CAT_DEF_
+  CAT_
+  FILTER
+  BA_DEF_DEF_
+  EV_DATA_
+  ENVVAR_DATA_
+  SGTYPE_
+  SGTYPE_VAL_
+  BA_DEF_SGTYPE_
+  BA_SGTYPE_
+  SIG_TYPE_REF_
+  VAL_TABLE_
+  SIG_GROUP_
+  SIG_VALTYPE_
+  SIGTYPE_VALTYPE_
+  BO_TX_BU_
+  BA_DEF_REL_
+  BA_REL_
+  BA_DEF_DEF_REL_
+  BU_SG_REL_
+  BU_EV_REL_
+  BU_BO_REL_
+  SG_MUL_VAL_
+
+BS_:
+
+BU_: BABYDRIVER BMS_CARRIER CAN_COMMUNICATION CAN_DEBUG CENTRE_CONSOLE CHARGER MOTOR_CONTROLLER NEW_CAN PEDAL POWER_DISTRIBUTION POWER_SELECT SOLAR_SENSE STEERING TELEMETRY UV_CUTOFF
+
+BO_ 2016 babydriver: 8 babydriver
+  SG_ id : 0|8@1+ (1,0) [0|100] "" babydriver
+  SG_ data0 : 8|8@1+ (1,0) [0|100] "" babydriver
+  SG_ data1 : 16|8@1+ (1,0) [0|100] "" babydriver
+  SG_ data2 : 24|8@1+ (1,0) [0|100] "" babydriver
+  SG_ data3 : 32|8@1+ (1,0) [0|100] "" babydriver
+  SG_ data4 : 40|8@1+ (1,0) [0|100] "" babydriver
+  SG_ data5 : 48|8@1+ (1,0) [0|100] "" babydriver
+  SG_ data6 : 56|8@1+ (1,0) [0|100] "" babydriver
+
+BO_ 1 battery_status: 4 bms_carrier
+  SG_ batt_perc : 0|16@1+ (1,0) [0|100] "%" centre_console, power_distribution
+  SG_ status : 16|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+  SG_ fault : 24|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+    VAL_ 1 fault 0 "BATTERY SAFE" 1 "BATTERY FAULT";
+
+BO_ 961 battery_vt: 6 bms_carrier
+  SG_ module_id : 0|16@1+ (1,0) [0|100] "" centre_console, telemetry
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" centre_console, telemetry
+  SG_ temperature : 32|16@1+ (1,0) [0|100] "" centre_console, telemetry
+
+BO_ 1057 battery_aggregate_vc: 8 bms_carrier
+  SG_ voltage : 0|32@1+ (1,0) [0|100] "" telemetry
+  SG_ current : 32|32@1+ (1,0) [0|100] "" telemetry
+
+BO_ 1825 battery_fan_state: 8 bms_carrier
+  SG_ fan_1 : 0|8@1+ (1,0) [0|100] "" bms_carrier
+  SG_ fan_2 : 8|8@1+ (1,0) [0|100] "" bms_carrier
+  SG_ fan_3 : 16|8@1+ (1,0) [0|100] "" bms_carrier
+  SG_ fan_4 : 24|8@1+ (1,0) [0|100] "" bms_carrier
+  SG_ fan_5 : 32|8@1+ (1,0) [0|100] "" bms_carrier
+  SG_ fan_6 : 40|8@1+ (1,0) [0|100] "" bms_carrier
+  SG_ fan_7 : 48|8@1+ (1,0) [0|100] "" bms_carrier
+  SG_ fan_8 : 56|8@1+ (1,0) [0|100] "" bms_carrier
+
+BO_ 1857 battery_relay_info: 1 bms_carrier
+  SG_ state : 0|8@1+ (1,0) [0|100] "" power_distribution
+
+BO_ 2 one_shot_msg: 4 can_communication
+  SG_ sig1 : 0|16@1+ (1,0) [0|100] "" can_communication
+  SG_ sig2 : 16|16@1+ (1,0) [0|100] "" can_communication
+
+BO_ 3 test_debug: 4 can_debug
+  SG_ operation : 0|8@1+ (1,0) [0|100] "" can_debug
+  SG_ operandA : 8|8@1+ (1,0) [0|100] "" can_debug
+  SG_ operandB : 16|8@1+ (1,0) [0|100] "" can_debug
+  SG_ operandC : 24|8@1+ (1,0) [0|100] "" can_debug
+
+BO_ 36 cc_power_control: 2 centre_console
+  SG_ power_event : 0|8@1+ (1,0) [0|100] "" power_distribution
+  SG_ hazard_enabled : 8|8@1+ (1,0) [0|100] "" power_distribution
+    VAL_ 36 power_event 1 "POWER ON - BMS CLOSE RELAY" 2 "POWER DRIVE - BMS CLOSE RELAY";
+    VAL_ 36 hazard_enabled 0 "NO HAZARD" 1 "HAZARD";
+
+BO_ 68 drive_output: 8 centre_console
+  SG_ target_velocity : 0|32@1+ (1,0) [0|100] "" motor_controller
+  SG_ drive_state : 32|8@1+ (1,0) [0|100] "" motor_controller
+  SG_ cruise_control : 40|8@1+ (1,0) [0|100] "" motor_controller
+  SG_ regen_braking : 48|8@1+ (1,0) [0|100] "" motor_controller
+  SG_ precharge : 56|8@1+ (1,0) [0|100] "" motor_controller
+
+BO_ 1541 request_to_charge: 1 charger
+  SG_ signal1 : 0|8@1+ (1,0) [0|100] "" centre_console
+
+BO_ 1605 charger_connected_state: 1 charger
+  SG_ is_connected : 0|8@1+ (1,0) [0|100] "" charger
+
+BO_ 1701 charger_fault: 1 charger
+  SG_ fault : 0|8@1+ (1,0) [0|100] "" telemetry
+
+BO_ 966 motor_controller_vc: 8 motor_controller
+  SG_ mc_voltage_l : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ mc_current_l : 16|16@1+ (1,0) [0|100] "" centre_console
+  SG_ mc_voltage_r : 32|16@1+ (1,0) [0|100] "" centre_console
+  SG_ mc_current_r : 48|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 998 motor_velocity: 4 motor_controller
+  SG_ velocity_l : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ velocity_r : 16|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 1030 motor_status: 8 motor_controller
+  SG_ motor_status_l : 0|32@1+ (1,0) [0|100] "" centre_console
+  SG_ motor_status_r : 32|32@1+ (1,0) [0|100] "" centre_console
+
+BO_ 1222 motor_sink_temps: 8 motor_controller
+  SG_ motor_temp_l : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ heatsink_temp_l : 16|16@1+ (1,0) [0|100] "" centre_console
+  SG_ motor_temp_r : 32|16@1+ (1,0) [0|100] "" centre_console
+  SG_ heatsink_temp_r : 48|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 1254 dsp_board_temps: 8 motor_controller
+  SG_ dsp_temp_l : 0|32@1+ (1,0) [0|100] "" centre_console
+  SG_ dsp_temp_r : 32|32@1+ (1,0) [0|100] "" centre_console
+
+BO_ 1286 mc_status: 7 motor_controller
+  SG_ limit_bitset_l : 0|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+  SG_ error_bitset_l : 8|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+  SG_ limit_bitset_r : 16|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+  SG_ error_bitset_r : 24|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+  SG_ board_fault_bitset : 32|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+  SG_ overtemp_bitset : 40|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+  SG_ precharge_status : 48|8@1+ (1,0) [0|100] "" centre_console, power_distribution
+
+BO_ 454 precharge_completed: 1 motor_controller
+  SG_ notification : 0|8@1+ (1,0) [0|100] "" centre_console
+
+BO_ 7 transmit_msg1: 1 new_can
+  SG_ status : 0|8@1+ (1,0) [0|100] "" centre_console, new_can
+
+BO_ 39 transmit_msg2: 2 new_can
+  SG_ signal : 0|8@1+ (1,0) [0|100] "" centre_console, new_can
+  SG_ signal2 : 8|8@1+ (1,0) [0|100] "" centre_console, new_can
+
+BO_ 71 transmit_msg3: 1 new_can
+  SG_ help : 0|8@1+ (1,0) [0|100] "" centre_console
+
+BO_ 584 pedal_output: 8 pedal
+  SG_ throttle_output : 0|32@1+ (1,0) [0|100] "" motor_controller, centre_console, power_distribution
+  SG_ brake_output : 32|32@1+ (1,0) [0|100] "" motor_controller, centre_console, power_distribution
+
+BO_ 1449 uv_cutoff_notification: 1 power_distribution
+  SG_ signal1 : 0|8@1+ (1,0) [0|100] "" telemetry
+
+BO_ 1737 current_measurement: 4 power_distribution
+  SG_ current_id : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ current : 16|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 1993 pd_fault: 4 power_distribution
+  SG_ fault_data : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ faulting_output : 16|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 1481 horn_and_lights: 2 power_distribution
+  SG_ horn_state : 0|8@1+ (1,0) [0|100] "" uv_cutoff
+  SG_ lights_state : 8|8@1+ (1,0) [0|100] "" uv_cutoff
+
+BO_ 745 lights_sync: 1 power_distribution
+  SG_ signal1 : 0|8@1+ (1,0) [0|100] "" lights_front
+
+BO_ 105 power_info: 2 power_distribution
+  SG_ power_state : 0|8@1+ (1,0) [0|100] "" centre_console
+  SG_ pd_fault : 8|8@1+ (1,0) [0|100] "" centre_console
+    VAL_ 105 power_state 0 "POWER OFF" 1 "POWER ON" 2 "POWER DRIVE";  
+    VAL_ 105 pd_fault 0 "PD SAFE";
+
+BO_ 41 pd_status: 1 power_distribution
+  SG_ fault_bitset : 0|8@1+ (1,0) [0|100] "" centre_console
+
+BO_ 329 bms_relays: 1 power_distribution
+  SG_ relays_state : 0|8@1+ (1,0) [0|100] "" bms_carrier
+
+BO_ 42 power_select_status: 2 power_select
+  SG_ status : 0|8@1+ (1,0) [0|100] "" centre_console
+  SG_ fault : 8|8@1+ (1,0) [0|100] "" centre_console
+
+BO_ 74 power_select_aux_measurements: 8 power_select
+  SG_ aux_voltage : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ aux_current : 16|16@1+ (1,0) [0|100] "" centre_console
+  SG_ aux_temp : 32|16@1+ (1,0) [0|100] "" centre_console
+  SG_ power_supply_current : 48|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 106 power_select_dcdc_measurements: 8 power_select
+  SG_ dcdc_voltage : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ dcdc_current : 16|16@1+ (1,0) [0|100] "" centre_console
+  SG_ dcdc_temp : 32|16@1+ (1,0) [0|100] "" centre_console
+  SG_ power_supply_voltage : 48|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 683 mppt_1: 8 solar_sense
+  SG_ current : 0|16@1+ (1,0) [0|100] "" telemetry
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" telemetry
+  SG_ pwm : 32|16@1+ (1,0) [0|100] "" telemetry
+  SG_ status : 48|16@1+ (1,0) [0|100] "" telemetry
+
+BO_ 715 mppt_2: 8 solar_sense
+  SG_ current : 0|16@1+ (1,0) [0|100] "" telemetry
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" telemetry
+  SG_ pwm : 32|16@1+ (1,0) [0|100] "" telemetry
+  SG_ status : 48|16@1+ (1,0) [0|100] "" telemetry
+
+BO_ 747 mppt_3: 8 solar_sense
+  SG_ current : 0|16@1+ (1,0) [0|100] "" telemetry
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" telemetry
+  SG_ pwm : 32|16@1+ (1,0) [0|100] "" telemetry
+  SG_ status : 48|16@1+ (1,0) [0|100] "" telemetry
+
+BO_ 779 mppt_4: 8 solar_sense
+  SG_ current : 0|16@1+ (1,0) [0|100] "" telemetry
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" telemetry
+  SG_ pwm : 32|16@1+ (1,0) [0|100] "" telemetry
+  SG_ status : 48|16@1+ (1,0) [0|100] "" telemetry
+
+BO_ 811 mppt_5: 8 solar_sense
+  SG_ current : 0|16@1+ (1,0) [0|100] "" telemetry
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" telemetry
+  SG_ pwm : 32|16@1+ (1,0) [0|100] "" telemetry
+  SG_ status : 48|16@1+ (1,0) [0|100] "" telemetry
+
+BO_ 651 mppt_6: 8 solar_sense
+  SG_ current : 0|16@1+ (1,0) [0|100] "" telemetry
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" telemetry
+  SG_ pwm : 32|16@1+ (1,0) [0|100] "" telemetry
+  SG_ status : 48|16@1+ (1,0) [0|100] "" telemetry
+
+BO_ 843 current_sense: 5 solar_sense
+  SG_ current : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ voltage : 16|16@1+ (1,0) [0|100] "" centre_console
+  SG_ relay_status : 32|8@1+ (1,0) [0|100] "" centre_console
+
+BO_ 875 thermal_status: 7 solar_sense
+  SG_ overtemp : 0|8@1+ (1,0) [0|100] "" centre_console
+  SG_ fullspeed : 8|8@1+ (1,0) [0|100] "" centre_console
+  SG_ fan_fail : 16|8@1+ (1,0) [0|100] "" centre_console
+  SG_ temp_1 : 24|16@1+ (1,0) [0|100] "" centre_console
+  SG_ temp_2 : 40|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 907 thermal_temps: 8 solar_sense
+  SG_ temp_3 : 0|16@1+ (1,0) [0|100] "" centre_console
+  SG_ temp_4 : 16|16@1+ (1,0) [0|100] "" centre_console
+  SG_ temp_5 : 32|16@1+ (1,0) [0|100] "" centre_console
+  SG_ temp_6 : 48|16@1+ (1,0) [0|100] "" centre_console
+
+BO_ 939 solar_info: 1 solar_sense
+  SG_ solar_fault : 0|8@1+ (1,0) [0|100] "" centre_console
+
+BO_ 684 steering_info: 2 steering
+  SG_ input_cc : 0|8@1+ (1,0) [0|100] "" power_distribution, motor_controller, centre_console
+  SG_ input_lights : 8|8@1+ (1,0) [0|100] "" power_distribution, motor_controller, centre_console
+    VAL_ 684 input_cc 1 "CC DECREASE" 2 "CC INCREASE" 4 "CC TOGGLE";
+    VAL_ 684 input_lights 0 "OFF" 1 "LEFT SIGNAL" 2 "RIGHT SIGNAL";
+
+BO_ 13 test_msg: 1 telemetry
+  SG_ test : 0|8@1+ (1,0) [0|100] "" telemetry
+
+BO_ 1454 uv_cutoff_notification1: 1 uv_cutoff
+  SG_ signal1 : 0|8@1+ (1,0) [0|100] "" telemetry
