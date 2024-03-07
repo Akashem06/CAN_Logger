@@ -5,26 +5,42 @@ This module logs CAN messages and decodes them using DBC files (exported from MS
 import os
 import time
 import subprocess
-from dotenv import load_dotenv
 import cantools
 import can
 
-load_dotenv()
 can_bus = can.interface.Bus('can0', bustype='socketcan')
 subprocess.run(
-    ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000'], check=True
+    ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000']
 )
 time.sleep(1)
 # Try again
 subprocess.run(
-    ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000'], check=True
+    ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000']
 )
 subprocess.run(
     ['sudo', 'ip', 'link', 'set', 'can0', 'up'], check=True
 )
 
+CAN_DECODED_DATA = (
+    'TIME                    '
+    + '  |  '
+    + '[CAN STATE]'
+    + '  |  '
+    + 'CAN ID (Hex)  '
+    + '   '
+    + '  |  '
+    + 'name'
+    + '  |  '
+    + 'sender'
+    + '  |  '
+    + 'decoded'
+    + '  |  '
+    + 'bytes'
+)
+print(CAN_DECODED_DATA)
+
 try:
-    db = cantools.database.load_file(os.getenv("DBC_PATH"))
+    db = cantools.database.load_file("dbc/system_can.dbc")
 except BaseException:
     print("Must generate DBC file first")
     print("Ensure that you have specified the path of the DBC file in .env")
@@ -38,7 +54,12 @@ while True:
 
         CAN_DECODED_DATA = (
             time.asctime(time.localtime())
-            + '     '
+            + '  |  '
+            + '[CAN WORKS]'
+            + '  |  '
+            + 'CAN ID (Hex): '
+            + str(hex(msg.arbitration_id)[2:].zfill(3))
+            + '  |  '
             + name
             + '  |  '
             + sender
@@ -49,6 +70,13 @@ while True:
         )
 
     except Exception as error:
-        CAN_DECODED_DATA = '[CAN ERROR/DECODE ERROR]' + '  |  ' + str(error)
+        CAN_DECODED_DATA = (
+            time.asctime(time.localtime())
+            + '  |  '
+            + '[CAN ERROR]'
+            + '  |  '
+            + 'CAN ID (Hex): '
+            + hex(error.args[0])[2:].zfill(3)
+        )
     finally:
         print(CAN_DECODED_DATA)
