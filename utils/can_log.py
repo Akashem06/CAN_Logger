@@ -8,17 +8,14 @@ import subprocess
 import cantools
 import can
 
+time.sleep(10)
 can_bus = can.interface.Bus('can0', bustype='socketcan')
-subprocess.run(
+subprocess.Popen(
     ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000']
 )
-time.sleep(1)
-# Try again
-subprocess.run(
-    ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000']
-)
-subprocess.run(
-    ['sudo', 'ip', 'link', 'set', 'can0', 'up'], check=True
+time.sleep(10)
+subprocess.Popen(
+    ['sudo', 'ip', 'link', 'set', 'can0', 'up']
 )
 
 CAN_DECODED_DATA = (
@@ -34,7 +31,7 @@ CAN_DECODED_DATA = (
 print(CAN_DECODED_DATA + '\n')
 
 try:
-    db = cantools.database.load_file("dbc/system_can.dbc")
+    db = cantools.database.load_file("/home/midnightsun/Downloads/telemMSXV/dbc/system_can.dbc")
 except BaseException:
     print("Must generate DBC file first")
     print("Ensure that you have specified the path of the DBC file in .env")
