@@ -1,12 +1,15 @@
-'''
-This module logs CAN messages and decodes them using DBC files (exported from MSXV)
-'''
-
-import os
 import time
 import subprocess
 import cantools
 import can
+import signal
+import sys
+
+def shutdown_handler(signum, frame):
+    print("Shutting down gracefully...")
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, shutdown_handler)
 
 time.sleep(10)
 can_bus = can.interface.Bus('can0', bustype='socketcan')
