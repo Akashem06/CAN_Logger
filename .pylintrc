@@ -522,11 +522,3 @@ max-statements=50
 
 # Minimum number of public methods for a class (see R0903).
 min-public-methods=2
-
-
-[EXCEPTIONS]
-
-# Exceptions that will emit a warning when being caught. Defaults to
-# "builtins.BaseException, builtins.Exception".
-overgeneral-exceptions=builtins.BaseException,
-                       builtins.Exception

@@ -11,12 +11,12 @@ def shutdown_handler(signum, frame):
 
 signal.signal(signal.SIGTERM, shutdown_handler)
 
-time.sleep(10)
+time.sleep(1)
 can_bus = can.interface.Bus('can0', bustype='socketcan')
 subprocess.Popen(
     ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000']
 )
-time.sleep(10)
+time.sleep(1)
 subprocess.Popen(
     ['sudo', 'ip', 'link', 'set', 'can0', 'up']
 )
