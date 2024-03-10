@@ -5,9 +5,14 @@ import can
 import signal
 import sys
 import os
+from datetime import datetime
 
+formatted_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+print(formatted_datetime)
 
-CAN_LOG_FILE = "TODO"
+# Create the file name based on the formatted date and time
+CAN_LOG_FILE = f"{formatted_datetime}.txt"
+
 
 def shutdown_handler(signum, frame):
     print("Shutting down gracefully...")
@@ -29,13 +34,6 @@ create_log_file()
 
 time.sleep(1)
 can_bus = can.interface.Bus('can0', bustype='socketcan')
-subprocess.Popen(
-    ['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000']
-)
-time.sleep(1)
-subprocess.Popen(
-    ['sudo', 'ip', 'link', 'set', 'can0', 'up']
-)
 
 CAN_DECODED_DATA = (
     'TIME                    '

@@ -5,6 +5,7 @@ Import('env')
 
 def run_lint(target, source, env):
     pylint_cmd = 'pylint --rcfile=.pylintrc ' 
+    print(FILES_STR)
     if len(FILES) > 0:
         print('Formatting .py files\n')
         result = subprocess.run(f'{pylint_cmd} {FILES_STR}', shell=True)
