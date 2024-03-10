@@ -27,7 +27,7 @@ else: # Unknown command
     
 Help('''
 Usage:
-  scons [OPTIONS]
+scons [OPTIONS]
 
 Options:
   -h, --help      Show this help message

@@ -2,27 +2,35 @@
 This module autogenerates log files and writes CAN data to them
 '''
 import time
-import subprocess
 import signal
 import sys
 import os
+from datetime import datetime
 import cantools
 import can
-from datetime import datetime
 
 formatted_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 CAN_LOG_FILE = f"{formatted_datetime}.txt"
 
 def shutdown_handler(signum, frame):
+    '''
+    Shutdown handler when Rpi shutoff
+    '''
     print("Shutting down gracefully...")
     save_data_to_file()
     sys.exit(0)
 
 def save_data_to_file():
+    '''
+    Writes data to the file
+    '''
     with open(CAN_LOG_FILE, "a") as log_file:
         log_file.write(CAN_DECODED_DATA + '\n')
 
 def create_log_file():
+    '''
+    Autogenerates the file if not created already, then writes to it
+    '''
     if not os.path.isfile(CAN_LOG_FILE):
         with open(CAN_LOG_FILE, "w") as log_file:
             log_file.write("Log file for CAN decoded data\n")
@@ -44,7 +52,7 @@ CAN_DECODED_DATA = (
     + '  |  '
     + 'DATA'
 )
-print(CAN_DECODED_DATA + '\n')
+save_data_to_file()
 
 try:
     db = cantools.database.load_file("/home/midnightsun/Downloads/telemMSXV/dbc/system_can.dbc")
