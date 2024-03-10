@@ -1,18 +1,17 @@
+'''
+This module autogenerates log files and writes CAN data to them
+'''
 import time
 import subprocess
-import cantools
-import can
 import signal
 import sys
 import os
+import cantools
+import can
 from datetime import datetime
 
 formatted_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-print(formatted_datetime)
-
-# Create the file name based on the formatted date and time
 CAN_LOG_FILE = f"{formatted_datetime}.txt"
-
 
 def shutdown_handler(signum, frame):
     print("Shutting down gracefully...")
