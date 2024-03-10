@@ -3,6 +3,7 @@ This module autogenerates log files and writes CAN data to them
 '''
 import time
 import signal
+import subprocess
 import sys
 import os
 from datetime import datetime
@@ -10,7 +11,7 @@ import cantools
 import can
 
 formatted_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-CAN_LOG_FILE = f"{formatted_datetime}.txt"
+CAN_LOG_FILE = f"/home/midnightsun/Documents/{formatted_datetime}.log"
 
 def shutdown_handler(signum, frame):
     '''
@@ -39,8 +40,10 @@ signal.signal(signal.SIGTERM, shutdown_handler)
 
 create_log_file()
 
+subprocess.run(['sudo', 'ip', 'link', 'set', 'can0', 'up', 'type', 'can', 'bitrate', '500000'])
 time.sleep(1)
-can_bus = can.interface.Bus('can0', bustype='socketcan')
+subprocess.run(['sudo', 'ip', 'link', 'set', 'can0', 'up'])
+can_bus = can.interface.Bus(channel='can0', bustype='socketcan')
 
 CAN_DECODED_DATA = (
     'TIME                    '
@@ -98,6 +101,3 @@ while True:
             + hex(error.args[0])[2:].zfill(3)
         )
         save_data_to_file()
-
-    finally:
-        print(CAN_DECODED_DATA)
