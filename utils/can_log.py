@@ -12,6 +12,7 @@ import can
 
 formatted_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 CAN_LOG_FILE = f"/home/midnightsun/Documents/{formatted_datetime}.log"
+counter = 0
 
 def shutdown_handler(signum, frame):
     '''
@@ -64,6 +65,9 @@ except BaseException:
     print("Ensure that you have specified the path of the DBC file in .env")
 
 while True:
+    counter += 1
+    if !(counter%60):
+        subprocess.run(['cat', CAN_LOG_FILE])
     try:
         msg = can_bus.recv()
         decoded = db.decode_message(msg.arbitration_id, msg.data)
