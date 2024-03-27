@@ -20,4 +20,5 @@ ROOT = Dir('#')
 FILES = glob.glob(f'{ROOT}/**/*.py', recursive=True)
 FILES_STR = ' '.join(FILES)
 
+Command('#/format', [], run_lint)
 Command('#/lint', [], run_lint)
