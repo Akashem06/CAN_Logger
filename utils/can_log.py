@@ -66,7 +66,7 @@ except BaseException:
 
 while True:
     counter += 1
-    if !(counter%60):
+    if not counter%60:
         subprocess.run(['cat', CAN_LOG_FILE])
     try:
         msg = can_bus.recv()
