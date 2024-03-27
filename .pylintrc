@@ -466,6 +466,8 @@ known-third-party=enchant
 # Couples of modules and preferred modules, separated by a comma.
 preferred-modules=
 
+# Disable the 'subprocess-run-check' warning
+disable=subprocess-run-check
 
 [CLASSES]
 
