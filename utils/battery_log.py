@@ -49,14 +49,14 @@ def unpack_message(msg):
   Unpacks the CAN message into readable data
   '''
   if msg.arbitration_id == BATTERY_STATUS_ID:
-    fault = int.from_bytes(msg.data[0:2])
-    fan1_status = int.from_bytes(msg.data[2])
-    fan1_status = int.from_bytes(msg.data[3])
+    fault = int.from_bytes(msg.data[0:2], byteorder='big')
+    fan1_status = int.from_bytes(msg.data[2], byteorder='big')
+    fan1_status = int.from_bytes(msg.data[3], byteorder='big')
   elif msg.arbitration_id == BATTERY_VT_ID:
-    voltage = int.from_bytes(msg.data[0:2])
-    current = int.from_bytes(msg.data[2:4])
-    temperature = int.from_bytes(msg.data[4:6])
-    batt_soc = int.from_bytes(msg.data[6:8])
+    voltage = int.from_bytes(msg.data[0:2], byteorder='big')
+    current = int.from_bytes(msg.data[2:4], byteorder='big')
+    temperature = int.from_bytes(msg.data[4:6], byteorder='big')
+    batt_soc = int.from_bytes(msg.data[6:8], byteorder='big')
   else:
     print("ERROR")
 
